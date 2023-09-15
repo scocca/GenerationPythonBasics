@@ -1,0 +1,41 @@
+print("Bienvenido a FIZZ BUZZ, si el numero es divisible por 3 responda fizz, si el numero es divisible por 5 responda buzz, si es divisible por ambos fizzBuzz, si no cumple ninguna regla solo repita el numero ")
+array=[]
+print("cuantas rondas desea jugar")
+limit=int(input())
+for num in range(1,limit+1):
+    array.append(num)
+score=0
+
+for num in array:
+    print('numero es: ' + str(num))
+    answer=input('tu respuesta: ')
+    if num%15==0 and answer.lower()=='fizzbuzz':
+        score=score+5
+        if num < limit:
+            print('correcto vamos al siguiente!')  
+        else:
+            pass
+    elif num%5==0 and answer.lower()=='buzz':
+        score=score+5
+        if num < limit:
+            print('correcto vamos al siguiente!')  
+        else:
+            pass
+    elif num%3==0 and answer.lower()=='fizz':
+        score=score+5
+        if num < limit:
+            print('correcto vamos al siguiente!')  
+        else:
+            pass
+    elif str(num)==answer and num%3!=0 and num%5!=0:
+        score=score+5
+        if num < limit:
+            print('correcto vamos al siguiente!')  
+        else:
+            pass
+    else:
+        print('Fallaste')
+
+print("Tu puntaje es: "+ str(score))
+print("Fin del juego")
+print("Santiago Cocca")

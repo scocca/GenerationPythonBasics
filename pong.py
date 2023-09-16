@@ -7,12 +7,13 @@
 #3.- sudo apt intall python3-tk
 
 #Importo la libreria turtle, que sirve para dibujar figuras en programas que 
-#repiten moviemientos simples
+#repiten moviemientos simples, la libreria time, para usar timers como retardadores
+#y random para generar numeros al azar
 import turtle
 import time
 from random import randrange, choice
 #Genero un numero aleatorio entre 1 y -1, y mediante una condicion if, me aseguro que no sea 0
-#se usara para que la pelota parta hacia un lado al azar
+#se usara para que la pelota parta hacia un lado al azar en el primer saque
 rand=randrange(-1,1)
 if rand==0:
      rand=1
@@ -105,7 +106,7 @@ inst.color("white")
 inst.penup()
 inst.hideturtle()
 inst.goto(0,0)
-inst.write("Atentos el juego ya comieza", align ="center", font=("courier", 25, "normal"))
+inst.write("Atentos el juego ya comieza \n el primero en llegar a 11 gana", align ="center", font=("courier", 25, "normal"))
 ##################################################################################
 #agrego la representacion de la malla de una mesa de ping pong
 
@@ -120,6 +121,7 @@ web.goto(0,-400)
 
 #le doy el nombre a mi funcion, en este caso para que la paleta del jugador 1, suba
 def playerOne_up():
+    #verifico la colicion con los bordes de la pantalla antes de mover la paleta
     if playerOne.ycor()+50<291:
     #obtengo la coordenada Y, almacenandola en una variable
         y=playerOne.ycor()
@@ -130,6 +132,7 @@ def playerOne_up():
 
 #le doy el nombre a mi funcion, en este caso para que la paleta del jugador 1, baje
 def playerOne_down():
+    #verifico la colicion con los bordes de la pantalla antes de mover la paleta
     if playerOne.ycor()-50>-291:
     #obtengo la coordenada Y, almacenandola en una variable
         y=playerOne.ycor()
@@ -140,6 +143,7 @@ def playerOne_down():
 
 #le doy el nombre a mi funcion, en este caso para que la paleta del jugador 2, suba
 def playerTwo_up():
+    #verifico la colicion con los bordes de la pantalla antes de mover la paleta
     if playerTwo.ycor()+50<291:
     #obtengo la coordenada Y, almacenandola en una variable
         y=playerTwo.ycor()
@@ -150,6 +154,7 @@ def playerTwo_up():
 
 #le doy el nombre a mi funcion, en este caso para que la paleta del jugador 2, baje
 def playerTwo_down():
+    #verifico la colicion con los bordes de la pantalla antes de mover la paleta
     if playerTwo.ycor()-50>-291:
     #obtengo la coordenada Y, almacenandola en una variable
         y=playerTwo.ycor()
@@ -222,6 +227,7 @@ while playerOneScore<11 or playerTwoScore<11:
             #y espero 5 segundos para terminar el programa
             if playerOneScore==11:
                  inst.write("Jugador 1 gano", align ="center", font=("courier", 25, "normal"))
+                 wn.update()
                  time.sleep(5)
                  break
             time.sleep(1)
@@ -237,6 +243,7 @@ while playerOneScore<11 or playerTwoScore<11:
             wn.update()
             if playerTwoScore==11:
                  inst.write("Jugador 2 gano", align ="center", font=("courier", 25, "normal"))
+                 wn.update()
                  time.sleep(5)
                  break
             time.sleep(1)

@@ -85,8 +85,8 @@ ball.penup()
 ball.goto(0,0)
 #separamos los ejes con dx que cambiara los ejes de forma separada, el 3 significa 
 #que se movera cada 1 pixel, controla la velocidad de la pelota
-ball.dx=0.75*rand
-ball.dy=0.75*rand
+ball.dx=0.5*rand
+ball.dy=0.5*rand
 
 #muestro los contadores de puntaj en pantalla
 pen = turtle.Turtle()
@@ -97,9 +97,15 @@ pen.penup()
 pen.hideturtle()
 pen.goto(0,260)
 #.write es muy similar a print() y se usa en la biblioteca turtle
-pen.write("Jugador 1: w,s       Jugador2: flechas", align ="center", font=("courier", 25, "normal"))
+pen.write("Jugador 1: w,s       Jugador2: flechas ", align ="center", font=("courier", 25, "normal"))
 
-
+inst=turtle.Turtle()
+inst.speed(0)
+inst.color("white")
+inst.penup()
+inst.hideturtle()
+inst.goto(0,0)
+inst.write("Atentos el juego ya comieza", align ="center", font=("courier", 25, "normal"))
 ##################################################################################
 #agrego la representacion de la malla de una mesa de ping pong
 
@@ -114,39 +120,43 @@ web.goto(0,-400)
 
 #le doy el nombre a mi funcion, en este caso para que la paleta del jugador 1, suba
 def playerOne_up():
+    if playerOne.ycor()+50<291:
     #obtengo la coordenada Y, almacenandola en una variable
-    y=playerOne.ycor()
+        y=playerOne.ycor()
     #le sumo 20px a la variable y para que se mueva 20px hacia arriba
-    y += 20
+        y += 20
     #actualizo la coordenada del jugador 1, con el valor de la variable y
-    playerOne.sety(y)
+        playerOne.sety(y)
 
 #le doy el nombre a mi funcion, en este caso para que la paleta del jugador 1, baje
 def playerOne_down():
+    if playerOne.ycor()-50>-291:
     #obtengo la coordenada Y, almacenandola en una variable
-    y=playerOne.ycor()
+        y=playerOne.ycor()
     #le resto 20px a la variable y para que se mueva 20px hacia arriba
-    y -= 20
+        y -= 20
     #actualizo la coordenada del jugador 1, con el valor de la variable y
-    playerOne.sety(y)
+        playerOne.sety(y)
 
 #le doy el nombre a mi funcion, en este caso para que la paleta del jugador 2, suba
 def playerTwo_up():
+    if playerTwo.ycor()+50<291:
     #obtengo la coordenada Y, almacenandola en una variable
-    y=playerTwo.ycor()
+        y=playerTwo.ycor()
     #le sumo 20px a la variable y para que se mueva 20px hacia arriba
-    y += 20
+        y += 20
     #actualizo la coordenada del jugador 2, con el valor de la variable y
-    playerTwo.sety(y)
+        playerTwo.sety(y)
 
 #le doy el nombre a mi funcion, en este caso para que la paleta del jugador 2, baje
 def playerTwo_down():
+    if playerTwo.ycor()-50>-291:
     #obtengo la coordenada Y, almacenandola en una variable
-    y=playerTwo.ycor()
+        y=playerTwo.ycor()
     #le resto 20px a la variable y para que se mueva 20px hacia arriba
-    y -= 20
+        y -= 20
     #actualizo la coordenada del jugador 2, con el valor de la variable y
-    playerTwo.sety(y)
+        playerTwo.sety(y)
 
 
 #Conecto el teclado
@@ -161,15 +171,22 @@ wn.onkeypress(playerOne_down, "s")
 wn.onkeypress(playerTwo_up, "Up")
 wn.onkeypress(playerTwo_down, "Down")
 
-###################################################################################    
+###################################################################################   
+wn.update()
+time.sleep(4)
+pen.clear()
+inst.clear()
+pen.write("Player One: {}        Player Two: {}".format(playerOneScore,playerTwoScore), align ="center", font=("courier", 25, "normal"))
 #inicio un bucle que sera el principal donde se correra el juego
-while playerOneScore<10 or playerTwoScore<10:
+while playerOneScore<11 or playerTwoScore<11:
+
         wn.update()
         #asigno el cambio en los ejes dentro del bucle, con los 3px que definimos en
         #ball.dx y dy
+        
         ball.setx(ball.xcor() + ball.dx)
         ball.sety(ball.ycor() + ball.dy)
-
+        
 ###################################################################################################
 #Sistema de colicion
 ###################################################################################################
@@ -190,22 +207,39 @@ while playerOneScore<10 or playerTwoScore<10:
     #En el caso de los bordes laterales devuelvo la pelota al centro, ya que si llegase a tocarlos
     #seria un punto, e invierto el valor de x para que el siguiente saque sea para el lado contrario
         if ball.xcor()>390:
+        #Reseteo todas las posiciones a cero
             ball.goto(0,0)
+            playerOne.goto(-350,0)
+            playerTwo.goto(350,0)
             ball.dx *=-1
             playerOneScore+=1
         #Pen.clear() me limpiara el marcador para evitar sobreescritura
             pen.clear()
         #Vuelvo a escribir el marcador con la puntuacion actualizada
             pen.write("Player One: {}        Player Two: {}".format(playerOneScore,playerTwoScore), align ="center", font=("courier", 25, "normal"))
-
+            wn.update()
+            #verifico si el jugador llego al puntaje ganador para finalizar la partida, muestro un mensaje
+            #y espero 5 segundos para terminar el programa
+            if playerOneScore==11:
+                 inst.write("Jugador 1 gano", align ="center", font=("courier", 25, "normal"))
+                 time.sleep(5)
+                 break
+            time.sleep(1)
 
         if ball.xcor()<-390:
             ball.goto(0,0)
+            playerOne.goto(-350,0)
+            playerTwo.goto(350,0)
             ball.dx *=-1
             playerTwoScore+=1
             pen.clear()
             pen.write("Player One: {}        Player Two: {}".format(playerOneScore,playerTwoScore), align ="center", font=("courier", 25, "normal"))
-
+            wn.update()
+            if playerTwoScore==11:
+                 inst.write("Jugador 2 gano", align ="center", font=("courier", 25, "normal"))
+                 time.sleep(5)
+                 break
+            time.sleep(1)
 ####################################################################################
 #Coliciones de las paletas
 

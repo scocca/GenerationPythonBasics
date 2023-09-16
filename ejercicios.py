@@ -67,6 +67,7 @@ while counter <=10:
 
 # Escribe un programa que sume números ingresados por el usuario hasta que se 
 # ingrese un número negativo utilizando un bucle while.
+
 print("ingrese el primer numero distinto de 0 a sumar")
 #capturo el valor ingresado por el usuario y lo transformo a tipo int
 num=int(input())
@@ -99,12 +100,10 @@ else:
             elif num2<0:
               #verifico que el valor no sea negativo
               print("se ingreso un numero negativo")
-            else:
-              pass
-            #si pasa las pruebas anteriores hago la suma y muestro el resultado
-            sum=sum + num2
-            print("total sumado: "+ str(sum))
-            
+            else: 
+                #si pasa las pruebas anteriores hago la suma y muestro el resultado
+                sum=sum + num2
+                print("total sumado: "+ str(sum))    
     elif num2<0:
         #Verifico que el segundo numero solicitado sea positivo
         print("Numero negativo, no se puede proceder")
@@ -198,7 +197,7 @@ else:
 
 # Crea un programa que verifique si un número es par o impar 
 # utilizando una sentencia if.
-print("Ingrese un numero para verificar si es positivo")
+print("Ingrese un numero para verificar si es par o impar")
 num=int(input())
 
 if not num:

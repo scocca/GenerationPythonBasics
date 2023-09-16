@@ -9,6 +9,13 @@
 #Importo la libreria turtle, que sirve para dibujar figuras en programas que 
 #repiten moviemientos simples
 import turtle
+import time
+from random import randrange, choice
+#Genero un numero aleatorio entre 1 y -1, y mediante una condicion if, me aseguro que no sea 0
+#se usara para que la pelota parta hacia un lado al azar
+rand=randrange(-1,1)
+if rand==0:
+     rand=1
 #################################################################################
 #Creo una ventana
 wn=turtle.Screen()
@@ -23,6 +30,11 @@ wn.tracer(0)
 
 ##################################################################################
 #Procedo a crear los objetos del juego
+
+#Declaro variables para el puntaje de los jugadores
+
+playerOneScore=0
+playerTwoScore=0
 
 ##################################################################################
 #Jugadores
@@ -72,9 +84,21 @@ ball.color("white")
 ball.penup()
 ball.goto(0,0)
 #separamos los ejes con dx que cambiara los ejes de forma separada, el 3 significa 
-#que se movera cada 3 pixeles
-ball.dx=1
-ball.dy=1
+#que se movera cada 1 pixel, controla la velocidad de la pelota
+ball.dx=0.75*rand
+ball.dy=0.75*rand
+
+#muestro los contadores de puntaj en pantalla
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color("white")
+pen.penup()
+#Comenta hideturtle() y busca la diferencia, es muy minima "Pista: esta cerca de la red"
+pen.hideturtle()
+pen.goto(0,260)
+#.write es muy similar a print() y se usa en la biblioteca turtle
+pen.write("Jugador 1: w,s       Jugador2: flechas", align ="center", font=("courier", 25, "normal"))
+
 
 ##################################################################################
 #agrego la representacion de la malla de una mesa de ping pong
@@ -136,24 +160,62 @@ wn.onkeypress(playerOne_up, "w")
 wn.onkeypress(playerOne_down, "s")
 wn.onkeypress(playerTwo_up, "Up")
 wn.onkeypress(playerTwo_down, "Down")
-###################################################################################
+
+###################################################################################    
 #inicio un bucle que sera el principal donde se correra el juego
+while playerOneScore<10 or playerTwoScore<10:
+        wn.update()
+        #asigno el cambio en los ejes dentro del bucle, con los 3px que definimos en
+        #ball.dx y dy
+        ball.setx(ball.xcor() + ball.dx)
+        ball.sety(ball.ycor() + ball.dy)
 
-while True:
-    wn.update()
-    #asigno el cambio en los ejes dentro del bucle, con los 3px que definimos en
-    #ball.dx y dy
-    ball.setx(ball.xcor() + ball.dx)
-    ball.sety(ball.ycor() + ball.dy)
-
+###################################################################################################
+#Sistema de colicion
+###################################################################################################
+#Borde superior e inferior
     #Agrego el sistema de colicion al borde superior
-    if ball.ycor()>290:
+        if ball.ycor()>290:
         #multiplico por -1 para dejar los 3px en negativo y asi que baje
-        ball.dy *= -1
+             ball.dy *= -1
     #Agrego el sistema de colicion al borde inferior
-    if ball.ycor()<-290:
+        if ball.ycor()<-290:
         #en el caso del borde inferior tambien multiplico por -1 para que se
         #transforme a positivo
-        ball.dy *=-1
+            ball.dy *=-1
 
 
+########################################################################################
+#Bordes laterales
+    #En el caso de los bordes laterales devuelvo la pelota al centro, ya que si llegase a tocarlos
+    #seria un punto, e invierto el valor de x para que el siguiente saque sea para el lado contrario
+        if ball.xcor()>390:
+            ball.goto(0,0)
+            ball.dx *=-1
+            playerOneScore+=1
+        #Pen.clear() me limpiara el marcador para evitar sobreescritura
+            pen.clear()
+        #Vuelvo a escribir el marcador con la puntuacion actualizada
+            pen.write("Player One: {}        Player Two: {}".format(playerOneScore,playerTwoScore), align ="center", font=("courier", 25, "normal"))
+
+
+        if ball.xcor()<-390:
+            ball.goto(0,0)
+            ball.dx *=-1
+            playerTwoScore+=1
+            pen.clear()
+            pen.write("Player One: {}        Player Two: {}".format(playerOneScore,playerTwoScore), align ="center", font=("courier", 25, "normal"))
+
+####################################################################################
+#Coliciones de las paletas
+
+#mediante una estructura if verifico que la pelota se encuente entre en la superficie de la paleta
+#en las coordenadas x e y, de los respectivos jugadores, de cumplirse la condicion le cambio el 
+#simbolo + o - para que la pelota salga en direccion contraria
+        if ((ball.xcor()>340 and ball.xcor()<350) and 
+            (ball.ycor()<playerTwo.ycor()+50 and ball.ycor()>playerTwo.ycor()-50)):
+                ball.dx*=-1
+
+        if ((ball.xcor()<-340 and ball.xcor()>-350) and 
+            (ball.ycor()<playerOne.ycor()+50 and ball.ycor()>playerOne.ycor()-50)):
+                ball.dx*=-1

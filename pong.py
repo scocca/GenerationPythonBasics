@@ -116,7 +116,9 @@ web.goto (0,400)
 web.goto(0,-400)
 
 ###################################################################################
-#comienzo a hacer las funciones que le daran vida al juego, y me permitiran conectar
+#comienzo a hacer las funciones (bloque de codigo, al que le asignamos un alias
+# que nos permitira usarlo mas tarde, mediante un llamado.
+# sin tener que reescribirlo) que le daran vida al juego, y me permitiran conectar
 #al teclado para realizar las interacciones
 
 #le doy el nombre a mi funcion, en este caso para que la paleta del jugador 1, suba
@@ -178,13 +180,15 @@ wn.onkeypress(playerTwo_down, "Down")
 
 ###################################################################################   
 wn.update()
+#con time.sleep() le doy un tiempo de espera antes de continuar con la siguiente linea de codigo
 time.sleep(4)
+#con .clear limpiop los mensajes
 pen.clear()
 inst.clear()
 pen.write("Player One: {}        Player Two: {}".format(playerOneScore,playerTwoScore), align ="center", font=("courier", 25, "normal"))
 #inicio un bucle que sera el principal donde se correra el juego
 while playerOneScore<11 or playerTwoScore<11:
-
+        #con .update() actualizo la informacion que se muestra en pantalla
         wn.update()
         #asigno el cambio en los ejes dentro del bucle, con los 3px que definimos en
         #ball.dx y dy
@@ -216,7 +220,9 @@ while playerOneScore<11 or playerTwoScore<11:
             ball.goto(0,0)
             playerOne.goto(-350,0)
             playerTwo.goto(350,0)
+        #hago que el siguiente saque sea en la direccion contraria a quien anoto el punto
             ball.dx *=-1
+        #Actualizo el puntaje
             playerOneScore+=1
         #Pen.clear() me limpiara el marcador para evitar sobreescritura
             pen.clear()

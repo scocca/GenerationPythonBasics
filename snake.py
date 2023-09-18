@@ -107,7 +107,7 @@ wn.onkeypress(setMovRight,"Right")
 wn.onkeypress(setMovLeft,"Left")
 
 #Declaro la variable de velocidad del juego, y la condicion de termino del juego con un boolean
-speed=0.4
+speed=0.05
 gameOver=False
 #inicializo el ciclo principal del juego
 while gameOver==False:

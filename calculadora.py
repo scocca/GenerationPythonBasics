@@ -9,6 +9,7 @@ from tkinter import ttk
 # ttk.Button(root, text="hello world in tk").grid()
 # root.mainloop()
 #############################################################################################
+#Calculadora
 #Creo la ventana
 wn=Tk()
 #le doy las dimensiones
@@ -58,9 +59,16 @@ def equal():
         r = str(eval(operator))
     except:
         r="ERROR"
-    #actualizo el texto en pantalla
+    #actualizo el texto en pantalla y mi variable operator con el ultimo valor
     operator=r
     screenText.set(r)
+
+######################################################################################################################################
+#creo los botones, asignandolos a la ventana wn, con su texto respectivo, la fuente y sus propiedades, el color del boton
+#el ancho, alto y mediante command que en este contexto especificara que accion realizar cuando ocurra un evento, en este caso click
+#entonces inicio una funcion anonima que llamara a la funcion declarada despues de :, con .grid, le asigno la posicion en la ventana
+#al boton indicando la fila, columna, numero de columnas a utilizar y padding, que en palabras simples es como el margen de cada boton
+
 #boton limpiar
 
 buttonCe = Button(wn, text="C", font=("arial",10,"bold"), background=buttonColor, width=40, height=buttonHeight, command=lambda:clear())
@@ -116,5 +124,8 @@ buttonDiv.grid(row=5, column=3,   columnspan=1, padx=2, pady=2)
 screen=Entry(wn, font=("arial",20,"bold"), width=20, borderwidth=5, background="gold", textvariable=screenText)
 screen.grid(row=0, column=0, columnspan=4, pady=4, padx=4)
 
+#Con mainloop inicio un bucle infinito que estara constantemente atento a los eventos que ocurran en la ventana
+#se ejecuta hasta que se cierre la ventana entre otras tareas, tambien se encarga de la actualizacion constante de la
+#interfaz
 wn.mainloop()
 

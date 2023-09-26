@@ -91,13 +91,13 @@ def isEven(num):
     #Evaluo si el modulo del numero sobre 2 es 0
     if num%2==0:
         #Si se cumple la condicion muestro un mensaje por pantalla
-        print("el numero {num} es par")
+        print("el numero "+str(num)+" es par")
         #Retorno el boolean solicitado en la guia
         return True
     #Si no se cumple la condicion anterior ingreso al siguiente bloque de codigo
     else:
         #Muestro un mensaje por pantalla
-        print("el numero {num} no es par")
+        print("el numero "+str(num)+" no es par")
         #Retorno el boolean solicitado por la guia
         return False
 #Return saca el valor deseado de nuestra funcion al plano superior, de no hacer un return todos los valores que trabajamos en la funcion
@@ -154,9 +154,9 @@ while True:
         flag=isEven(n)
         #Con el return verifico el resultado
         if flag ==True:
-            print("El numero {n} es par")
+            print("El numero "+str(n)+" es par")
         else:
-            print("El numero {n} no es par")
+            print("El numero "+str(n)+" no es par")
     elif option=="5":
         #muestro un mensaje por pantalla
         print("Verificar si el numero es un entero (Integer)")

@@ -151,14 +151,24 @@ while True:
         #declaro e inicializo una variable solicitando una entrada al usuario
         n=int(input("ingrese el numero a verificar: "))
         #llamo a la funcion entregando la variable anteriormente declarada e inicializada a la funcion isEven
-        isEven(n)
+        flag=isEven(n)
+        #Con el return verifico el resultado
+        if flag ==True:
+            print("El numero {n} es par")
+        else:
+            print("El numero {n} no es par")
     elif option=="5":
         #muestro un mensaje por pantalla
         print("Verificar si el numero es un entero (Integer)")
         #Declaro e inicializo una variable solicitando una entrada al usuario
         n=input("Ingrese el numero a verficiar: ")
         #llamo a la funcion isItAnInteger entregandole la variable anteriormente declarada e inicializada como parametro
-        isItAnInteger(n)
+        flag=isItAnInteger(n)
+        #Con el return verifico el resultado
+        if flag==True:
+            print("El numero {n} es Entero (Integer)")
+        else:
+            print("El numero {n} no es un entero (Integer)")
     elif option=="6":
         #llamo a la funcion crear Arrary
         crearArray()

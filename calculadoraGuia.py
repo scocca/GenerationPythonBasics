@@ -72,32 +72,57 @@ def addMultipleNumbers(numbers):
 def multiplyMultipleNumbers(numbers):
     #Verificamos si el arreglo esta vacio
     if len(numbers)==0:
-        #Si esta vacio llamo a la funcion crearArray() para 
+        #Si esta vacio llamo a la funcion crearArray() para llenar el array
         crearArray()
+    #Si no esta vacio se ejecutara el siguiente bloque de codigo
     else:
+        #Creo e inicializo la variable result para almacenar el resultado, esta vezs la inicio en 1, para que al
+        #Multiplicar no me arroje error
         result=1
+        #Con un ciclo for recorro el arreglo o lista
         for i in numbers:
-            result*= i   
+            #Cada iteracion multiplicara el result por el va,lor contenido en el indice actual (representado por i)
+            result*= i  
+        #muestro el resultado por pantalla     
         print(result)
 
+#Declaro una nueva funcion llamada isEven que recible como parametro num
 def isEven(num):
+    #Evaluo si el modulo del numero sobre 2 es 0
     if num%2==0:
+        #Si se cumple la condicion muestro un mensaje por pantalla
         print("el numero {num} es par")
+        #Retorno el boolean solicitado en la guia
         return True
+    #Si no se cumple la condicion anterior ingreso al siguiente bloque de codigo
     else:
+        #Muestro un mensaje por pantalla
         print("el numero {num} no es par")
+        #Retorno el boolean solicitado por la guia
         return False
+#Return saca el valor deseado de nuestra funcion al plano superior, de no hacer un return todos los valores que trabajamos en la funcion
+#moriran al terminar la ejecucion de esta
 
+#Creo una nueva funcion llamada isItAnInteger que recibe num como parametro
 def isItAnInteger(num):
+    #evaluo si el numero se puede transformar a tipo int (Integer) enetero en spanish
     if type(num)==int:
+        #si se cumple la condicion muestro el mensaje por pantalla
         print("El numero ingresado es un entero")
+        #hagio el return del boolean solicitado por la guia
         return True
+    #si no se ejecuto el bloque anterior, entro en el siguiente bloque de codigo
     else:
+        #muestro un mensaje por pantalla
         print("El numero ingresado no es un entero")
+        #Retorno el boolean solicitado por la guia
         return False
 
+#Muestro un mensaje de bienvenida a nuestra calculadora
 print("Bienvenido a la calculadora mejorada")
+#inicio un ciclo infinito en donde se ejecutara nuestro codigo
 while True:
+    #Muestro el menu e instrucciones por pantalla 
     print("Instrucciones: para usar las opciones 2 y 3 primero debe ejecutar la opcion 6 .- Crear lista de numeros ")
     print("Seleccione una opcion")
     print("1.- Calculadora")
@@ -107,25 +132,40 @@ while True:
     print("5.- Verificar si el numero es Entero (Integer)")
     print("6.- Crear lista de numeros")
     print("7.- Salir")
+    #Solicito una entrada al usuario
     option=input("Ingrese una opcion: ")
 
+    #Mediante sentencias if verifico el valor que ingreso el usuario
     if option=="1":
+        #llamo a la funcion
         basicCalculator()
     elif option=="2":
+        #llamo a la funcion entregandole el arreglo numbers como parametro
         addMultipleNumbers(numbers)
     elif option=="3":
+        #llamo a la funcion entregandole el arreglo numbers como parametro
         multiplyMultipleNumbers(numbers)
     elif option=="4":
+        #muestro un mensaje por pantalla
         print("Verificar si el numero es par")
+        #declaro e inicializo una variable solicitando una entrada al usuario
         n=int(input("ingrese el numero a verificar: "))
+        #llamo a la funcion entregando la variable anteriormente declarada e inicializada a la funcion isEven
         isEven(n)
     elif option=="5":
+        #muestro un mensaje por pantalla
         print("Verificar si el numero es un entero (Integer)")
+        #Declaro e inicializo una variable solicitando una entrada al usuario
         n=input("Ingrese el numero a verficiar: ")
+        #llamo a la funcion isItAnInteger entregandole la variable anteriormente declarada e inicializada como parametro
         isItAnInteger(n)
     elif option=="6":
+        #llamo a la funcion crear Arrary
         crearArray()
     elif option=="7":
+        #Termino el bucle infinito con break
         break
+    else:
+        print("No se ingreso una opcion valida")
     
 

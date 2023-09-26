@@ -165,6 +165,8 @@ while True:
     elif option=="7":
         #Termino el bucle infinito con break
         break
+    #En el caso de que no se ejecute ningun bloque de codigo entrara en el bloque else, que indicaria que el usuario no ingreso
+    # ninguna de las opciones listadas en el menu
     else:
         print("No se ingreso una opcion valida")
     

@@ -1,4 +1,3 @@
-
 def operations():
     while True:
         operation=input("Ingrese la operacion que desea realizar: ")
@@ -47,6 +46,7 @@ while True:
     print("1.- operaciones basicas (suma, resta, multiplicacion division")
     print("2.- Es par")
     print("3.- es Integer")
+    print("si desea cerrar la aplicacion presione enter")
     option=input("Ingrese su eleccion: ")
 
     if option=='1':
